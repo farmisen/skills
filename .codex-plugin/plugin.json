@@ -1,0 +1,11 @@
+{
+  "name": "farmisen-skills",
+  "version": "0.1.0",
+  "description": "farmisen's agent skills. Currently: bootstrap-project - interview-driven AGENTS.md/CLAUDE.md generation and migration.",
+  "author": { "name": "farmisen", "url": "https://github.com/farmisen" },
+  "homepage": "https://github.com/farmisen/skills",
+  "repository": "https://github.com/farmisen/skills",
+  "license": "MIT",
+  "keywords": ["skills", "agents-md", "bootstrap", "project-setup"],
+  "skills": "./skills/"
+}

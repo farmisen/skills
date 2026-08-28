@@ -1,0 +1,14 @@
+{
+  "name": "farmisen",
+  "owner": { "name": "farmisen", "url": "https://github.com/farmisen" },
+  "description": "farmisen's agent skills, installable as a Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "farmisen-skills",
+      "source": "./",
+      "description": "Skills for coding agents. Currently: bootstrap-project - interview-driven AGENTS.md/CLAUDE.md generation and migration.",
+      "category": "engineering",
+      "keywords": ["skills", "agents-md", "bootstrap", "project-setup"]
+    }
+  ]
+}
