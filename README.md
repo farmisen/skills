@@ -41,6 +41,11 @@ Codex CLI: the skills.sh install covers it (skills land in `~/.agents/skills`), 
 symlink `skills/bootstrap-project` there manually. A `.codex-plugin` manifest is
 included for Codex's plugin system as it matures.
 
+## Plugins in this marketplace
+
+- **farmisen-skills** — the skills (bootstrap-project, ...)
+- **elixir-lsp** — ElixirLS code-intelligence wiring (requires `brew install elixir-ls`)
+
 ## License
 
 MIT

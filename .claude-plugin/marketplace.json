@@ -1,6 +1,9 @@
 {
   "name": "farmisen",
-  "owner": { "name": "farmisen", "url": "https://github.com/farmisen" },
+  "owner": {
+    "name": "farmisen",
+    "url": "https://github.com/farmisen"
+  },
   "description": "farmisen's agent skills, installable as a Claude Code plugin.",
   "plugins": [
     {
@@ -8,7 +11,35 @@
       "source": "./",
       "description": "Skills for coding agents. Currently: bootstrap-project - interview-driven AGENTS.md/CLAUDE.md generation and migration.",
       "category": "engineering",
-      "keywords": ["skills", "agents-md", "bootstrap", "project-setup"]
+      "keywords": [
+        "skills",
+        "agents-md",
+        "bootstrap",
+        "project-setup"
+      ]
+    },
+    {
+      "name": "elixir-lsp",
+      "description": "ElixirLS language server for enhanced Elixir code intelligence",
+      "version": "0.1.0",
+      "author": {
+        "name": "farmisen",
+        "url": "https://github.com/farmisen"
+      },
+      "source": "./plugins/elixir-lsp",
+      "category": "development",
+      "strict": false,
+      "lspServers": {
+        "elixir": {
+          "command": "elixir-ls",
+          "args": [],
+          "extensionToLanguage": {
+            ".ex": "elixir",
+            ".exs": "elixir",
+            ".heex": "phoenix-heex"
+          }
+        }
+      }
     }
   ]
 }
