@@ -35,9 +35,15 @@ Skip anything Step 1 already answered; present inferred values for confirmation 
 of asking open questions. Cover:
 
 1. **Purpose** — one sentence: what is this project, who is it for?
-2. **Stack(s)** — confirm the inferred stack; ask which template profile applies:
-   `web-ts`, `rust`, `embedded-c`, `elixir`, `python`, `game`, `hardware`, `other`.
-   Multiple allowed (e.g. a device: `embedded-c` + `web-ts` for the companion app).
+2. **Stack(s)** — confirm the inferred stack along three composable axes (see
+   `templates/stacks/README.md`; multiple allowed per axis):
+   - language(s): `ts`, `python`, `rust`, `go`, `c-cpp`, `elixir`, `ruby`
+   - domain(s): `web-frontend`, `web-node`, `fastapi`, `rails`, `mobile`, `desktop`,
+     `browser-extension`, `embedded`, `game`, `shader`, `hardware`, `infra-devops`,
+     `data-ml`, `agent-skills`, `mcp-server`
+   - shape: `application`, `library`, or `cli` (monorepo is auto-detected, not asked)
+   Example: an encrypted pager = rust + embedded + hardware; a Next.js app =
+   ts + web-frontend + web-node. `other` is allowed on any axis.
 3. **Commands** — confirm build / test (all + single test) / lint / format / typecheck.
    Only commands that actually exist; no aspirational ones.
 4. **Tracker** — Linear / GitHub Issues / none / other. If Linear: team or project key.
@@ -56,13 +62,24 @@ of asking open questions. Cover:
    section: formatter/linter-enforced rules stay out; only unlintable rules earn a
    bullet in the stack notes.
 
+## Step 2b — Stack add-ons (second and final question batch)
+
+Read the chosen templates' **Interview add-ons** sections (`templates/stacks/<axis>/<name>.md`).
+Infer every default the add-on names (each question says where to look), then ask ONE
+batch containing only what could not be inferred plus confirmations of low-confidence
+inferences. Two batches total is the interview's hard ceiling — never ask add-ons one
+by one, and skip the batch entirely when everything was inferable.
+
 ## Step 3 — Render
 
 From `templates/` in this skill directory:
 
-1. `AGENTS.md` from `templates/AGENTS.base.md` + the matching `templates/stacks/<profile>.md`
-   section(s), placeholders filled from the interview. Target under ~120 lines. Drop any
-   template section the interview left empty — no placeholder residue, no "N/A" sections.
+1. `AGENTS.md` from `templates/AGENTS.base.md` + the chosen stack templates, composed in
+   language → domain → shape order, placeholders filled from the interview. Target under
+   ~120 lines regardless of how many templates were composed: merge overlapping sections
+   (one Verification norm, one Dependency policy — never one per template), keep only
+   interview-confirmed or repo-verified lines, drop empty sections and never render an
+   Interview add-ons section. No placeholder residue, no "N/A" sections.
 2. `CLAUDE.md` from `templates/CLAUDE.md` — the `@AGENTS.md` import plus only
    Claude-specific deltas (usually none at bootstrap).
 3. If MCP servers were requested: `.mcp.json` from `templates/mcp.json` (env-var

@@ -1,11 +1,22 @@
 {
   "name": "farmisen-skills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "farmisen's agent skills. Currently: bootstrap-project, which interviews you about a project's perimeter and generates (or migrates) its AGENTS.md + CLAUDE.md agent configuration.",
-  "author": { "name": "farmisen", "url": "https://github.com/farmisen" },
+  "author": {
+    "name": "farmisen",
+    "url": "https://github.com/farmisen"
+  },
   "homepage": "https://github.com/farmisen/skills",
   "repository": "https://github.com/farmisen/skills",
   "license": "MIT",
-  "keywords": ["skills", "agents-md", "bootstrap", "project-setup", "migration"],
-  "skills": ["./skills/bootstrap-project"]
+  "keywords": [
+    "skills",
+    "agents-md",
+    "bootstrap",
+    "project-setup",
+    "migration"
+  ],
+  "skills": [
+    "./skills/bootstrap-project"
+  ]
 }

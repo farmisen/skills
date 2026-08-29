@@ -12,7 +12,10 @@ first (stack, commands, existing config), interviews you only about what it cann
 infer (purpose, tracker, git gates, MCP, dev journal), then renders a lean `AGENTS.md`
 (canonical, read natively by Codex and 25+ tools) plus a one-line `CLAUDE.md` import
 shim for Claude Code, and optional `.mcp.json` / `.codex` config with env-var-only
-secrets.
+secrets. Stack knowledge is organized along three composable axes — 7 languages,
+15 domains, 3 shapes + a monorepo modifier — each template carrying agent failure
+modes, verification norms, and its own interview questions (asked only when the
+repo can't answer them).
 
 Existing `AGENTS.md`/`CLAUDE.md`? It runs a **migration**: every block is triaged
 (keep / retire-with-reason / personal / ask), kept factual claims are re-verified
