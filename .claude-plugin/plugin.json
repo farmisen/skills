@@ -1,6 +1,6 @@
 {
   "name": "farmisen-skills",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "farmisen's agent skills. Currently: bootstrap-project, which interviews you about a project's perimeter and generates (or migrates) its AGENTS.md + CLAUDE.md agent configuration.",
   "author": {
     "name": "farmisen",

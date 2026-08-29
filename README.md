@@ -22,7 +22,9 @@ Existing `AGENTS.md`/`CLAUDE.md`? It runs a **migration**: every block is triage
 against the repo so stale statements do not survive, and nothing is deleted until you
 approve the new file and the retire list side by side. It also detects a legacy
 single-file `docs/dev-journal.md` and can split it into sustainable monthly files
-under `docs/dev-journal/`.
+under `docs/dev-journal/`. A **refresh mode** handles the recurring job: verifying every
+claim in an existing config against the repo (CI alignment included) and proposing only
+the drift repairs, guided by a generation stamp in the file's footer.
 
 ## Install
 

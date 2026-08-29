@@ -1,6 +1,6 @@
 ---
 name: bootstrap-project
-description: Bootstrap a project's coding-agent configuration — AGENTS.md (canonical), a CLAUDE.md shim, and optional .mcp.json / .codex config — by interviewing the user about the project's perimeter (purpose, stack, tracker, commands, git etiquette), then rendering from the bundled templates. Use for a new project, "set up agents config", "bootstrap this repo", or when a repo has no AGENTS.md/CLAUDE.md.
+description: Bootstrap a project's coding-agent configuration — AGENTS.md (canonical), a CLAUDE.md shim, and optional .mcp.json / .codex config — by interviewing the user about the project's perimeter (purpose, stack, tracker, commands, git etiquette), then rendering from the bundled templates. Use for a new project ("set up agents config", "bootstrap this repo"), for migrating an existing AGENTS.md/CLAUDE.md, or in refresh mode ("refresh agents config", "update AGENTS.md") to repair drift between the config and the repo.
 ---
 
 # Bootstrap a project's agent configuration
@@ -27,6 +27,10 @@ Inspect the repo first so the interview only covers what can't be inferred:
   existing docs (`README`, `docs/`, `SPEC`).
 - Dev journal: `docs/dev-journal/` (current convention) or a single `docs/dev-journal.md`
   (legacy — flag it for migration in Step 3).
+- CI config (workflows, pipelines): what CI actually runs is ground truth for every
+  "proven =" and gate claim — collect the job commands for the CI-alignment check.
+- A generation stamp at the foot of an existing AGENTS.md (see Step 3) — read it: it
+  names the skill version and axes that produced the file.
 
 ## Step 2 — Interview (one batch, only the gaps)
 
@@ -98,9 +102,36 @@ From `templates/` in this skill directory:
      format prose into the README. Verify before deleting: every entry heading from the
      old file appears in exactly one new file and total entry count matches; show the
      user the file list, then `git rm docs/dev-journal.md` in the same change.
-5. Recommend (do not install) the matching LSP/code-intelligence plugins for the chosen
+5. **CI alignment**: cross-check the rendered "proven =" and gate claims against the CI
+   jobs collected in Step 1. If local gates and CI diverge (a check CI runs that the
+   gate command does not, or vice versa), say so in the file the way it is true —
+   "`make check` is not all of CI; hardware changes also need `make erc drc`" — never
+   render a gate claim CI contradicts.
+6. **Generation stamp**: end AGENTS.md with one HTML comment —
+   `<!-- bootstrap-project v{{skill_version}} · axes: {{chosen_axes}} · {{date}} -->` —
+   refresh mode reads it to know what produced the file and with which template era.
+7. Recommend (do not install) the matching LSP/code-intelligence plugins for the chosen
    stacks — e.g. typescript-lsp, rust-analyzer-lsp, clangd-lsp from the official
    marketplace — and note them at the end of your reply, not inside AGENTS.md.
+
+## Refresh mode (drift repair — the recurring job)
+
+When asked to refresh/update an existing config (or when a bootstrapped file has
+visibly drifted), do NOT re-run the full bootstrap:
+
+1. Read AGENTS.md (+ its generation stamp) and run the Step 1 observation pass fresh.
+2. Verify every factual claim in the file against the repo — commands exist and do what
+   the file says, "not started"/"exists" statements, tool versions, CI alignment (the
+   most common drift: a gate claim CI has outgrown).
+3. Propose ONLY the repairs, as a diff: stale claim → current truth, each with the
+   evidence that decided it. No interview; ask only where a repair needs a human call
+   (a claim that is aspiration vs. abandoned). Structure and voice of the file stay.
+4. Offer the journal entry (below) when a journal exists; update the generation stamp's
+   date. If the stamp's skill version is old, note which template improvements the file
+   predates — adopting them is the user's call, not automatic.
+
+When a journal exists (bootstrap and refresh alike), offer to record the change as an
+entry — what was repaired or generated, and why — in the current month's file.
 
 ## Migration mode (AGENTS.md or CLAUDE.md already exists)
 
@@ -142,6 +173,14 @@ removing it.
   commands that don't exist in the repo, and (migration) no carried claim you did not
   verify or flag.
 - Confirm CLAUDE.md's first line is exactly `@AGENTS.md`.
-- Show the user the generated AGENTS.md in full and ask for one round of corrections
-  before finishing. Remind them: commit these files; personal-only additions go in
-  `CLAUDE.local.md` (Claude) or a gitignored `AGENTS.override.md` (Codex).
+- Show the user the generated AGENTS.md in full and ask for one round of corrections —
+  and with it, THE gap question, which lands only now that a concrete draft exists:
+  **"What would an agent still get wrong in this repo that this file doesn't prevent?"**
+  Triage free-text answers through the same keep/retire filter as migration content —
+  the open question is not a bloat backdoor.
+- When a correction looks GENERAL rather than repo-specific (it would improve every
+  project of this stack, not just this one), say so and suggest adding it to the stack
+  template in the canonical skill repo (see PROVENANCE where vendored) — corrections
+  are how the templates stop being arbitrary.
+- Remind them: commit these files; personal-only additions go in `CLAUDE.local.md`
+  (Claude) or a gitignored `AGENTS.override.md` (Codex).

@@ -1,6 +1,6 @@
 {
   "name": "farmisen-skills",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "farmisen's agent skills. Currently: bootstrap-project - interview-driven AGENTS.md/CLAUDE.md generation and migration.",
   "author": {
     "name": "farmisen",
